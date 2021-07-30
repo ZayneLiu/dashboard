@@ -37,7 +37,7 @@ function Login() {
 				</div>
 
 				<button onClick={loginBtnOnClick}>
-					<img src={LoginBtnImg} />
+					<img src={LoginBtnImg} alt="login btn" />
 				</button>
 			</div>
 
@@ -177,15 +177,15 @@ function SignUp() {
 							required
 						/>
 
-						<img src={AddPicImg} />
+						<img src={AddPicImg} alt="add_picture_btn" />
 						<span>Add Picture</span>
 
-						<img src={selectedImg} />
+						<img src={selectedImg} alt="" />
 					</div>
 				</div>
 
 				<button onClick={signUpBtnOnClick}>
-					<img src={SignUpBtnImg} />
+					<img src={SignUpBtnImg} alt="register_btn" />
 				</button>
 			</div>
 		</div>

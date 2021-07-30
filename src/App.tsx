@@ -1,10 +1,5 @@
-import React, { useEffect } from "react";
-import {
-	BrowserRouter as Router,
-	Link,
-	Route,
-	useHistory,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Auth } from "./views/Auth";
 import { Home } from "./views/Home";
 import "./App.scss";
