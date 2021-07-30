@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-[![Build Status](https://app.travis-ci.com/ZayneLiu/dashboard.svg?branch=main)](https://app.travis-ci.com/ZayneLiu/dashboard)
+[![Build Status](https://app.travis-ci.com/ZayneLiu/dashboard.svg?branch=dev)](https://app.travis-ci.com/ZayneLiu/dashboard)
 
 Therapy box web dev test
 
