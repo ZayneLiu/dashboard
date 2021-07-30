@@ -1,0 +1,150 @@
+.form {
+	margin-top: 20px;
+	display: flex;
+	flex-flow: row;
+	max-width: 60vw;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	.spacer {
+		width: 130px;
+	}
+	.form-item {
+		margin-top: 60px;
+		position: relative;
+		label {
+			// make sure labels stay 1 layer below input
+			z-index: 1;
+
+			display: block;
+			position: absolute;
+			font-size: large;
+			margin-left: 2px;
+			top: 0;
+
+			user-select: none;
+
+			transition: all 0.2s ease-in-out;
+		}
+		input {
+			z-index: 2;
+
+			position: inherit;
+			color: inherit;
+			font-size: large;
+			font-family: inherit;
+			font-weight: bold;
+
+			background: transparent;
+			border: none;
+			border-bottom: 2px solid #fff;
+			outline: none;
+
+			padding: 3px 0 1px 10px;
+
+			&.invalid + label::before {
+				padding-right: 5px;
+				color: orangered;
+				content: "✗";
+			}
+			&.valid + label::before {
+				padding-right: 5px;
+				color: greenyellow;
+				content: "✓";
+			}
+			&:focus + label {
+				top: -20px;
+			}
+			&:not(:placeholder-shown) + label {
+				top: -20px;
+			}
+		}
+	}
+	button {
+		display: flex;
+
+		margin-top: 30px;
+		padding: 0;
+		border-radius: 25px;
+		cursor: pointer;
+		background: none;
+		border: none;
+		justify-self: center;
+
+		&:hover {
+			filter: brightness(1.05);
+		}
+		&:active {
+			filter: brightness(0.95);
+		}
+
+		img {
+			width: 300px;
+		}
+	}
+}
+
+.horizontal-fill {
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	.add-picture {
+		height: 140px;
+		width: 220px;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+
+		cursor: pointer;
+		user-select: none;
+
+		* {
+			position: absolute;
+		}
+		input {
+			display: none;
+		}
+		img {
+			height: 140px;
+			width: 220px;
+		}
+	}
+}
+
+.title {
+	font-size: 4rem;
+	margin: 0;
+}
+
+.login {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-evenly;
+	// gap: 50px;
+
+	.footer {
+		font-weight: bold;
+		margin-top: 10rem;
+		.register {
+			color: #ffe65e;
+			user-select: none;
+			cursor: pointer;
+			&:hover {
+				filter: brightness(1.05);
+				text-decoration: underline;
+			}
+			&:active {
+				filter: brightness(0.95);
+			}
+		}
+	}
+}
+
+.sign-up {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-evenly;
+}
