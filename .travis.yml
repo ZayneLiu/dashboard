@@ -2,13 +2,13 @@ language: node_js
 node:
   - 16
 
-before_install: npm install -g pnpm
+before_install: npm install -g pnpm && pnpm install --prefix client
 
 # install any dependencies required
 install: pnpm install
 
 # TODO: unit testing
-before_script: echo "unit test placeholder"
+before_script: pnpm run test && pnpm run test --prefix client && pnpm run build --prefix client
 
 # run the build script
 script: pnpm run build

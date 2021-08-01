@@ -1,1 +1,1 @@
-web: npx serve build
+web: npx nodemon index.ts
