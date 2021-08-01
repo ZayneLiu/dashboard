@@ -2,6 +2,14 @@ import UserModel, { UserSchema } from "./UserModel";
 
 const model = new UserModel();
 
+beforeEach(async () => {
+	await model.setup();
+});
+
+afterEach(async () => {
+	await model.cleanup();
+});
+
 test("[UserModel] registration", async () => {
 	const user: UserSchema = {
 		username: "test_username",
@@ -9,12 +17,9 @@ test("[UserModel] registration", async () => {
 		password: "test_password",
 	};
 
-	await model.setup();
-
 	await model.register(user);
 	await model.deleteUser(user);
 
-	await model.cleanup();
 	// expect(sum(1, 2)).toBe(3);
 });
 
@@ -24,10 +29,6 @@ test("[UserModel] login", async () => {
 		password: "test_password",
 	};
 
-	await model.setup();
-
 	await model.login(user);
-
-	await model.cleanup();
 	// expect(sum(1, 2)).toBe(3);
 });
