@@ -12,7 +12,6 @@ export default class DB {
 				"base64"
 			).toString("utf8")
 		);
-		// "mongodb+srv://z4yn3:ImnsxCLgRjYJczrT@cluster0.85gw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 		this.users = this.client.db("dashboard").collection("users");
 	}
 
