@@ -1,6 +1,8 @@
 language: node_js
 node:
   - 16
+yarn:
+  - 1.22
 
 before_install: npm install -g yarn
 
