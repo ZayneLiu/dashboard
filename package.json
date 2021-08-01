@@ -8,7 +8,7 @@
     "client": "npm start --prefix client",
     "test": "npm test --prefix client",
     "dev": "concurrently 'npm start' 'npm run client'",
-    "build": "pnpm build --prefix client"
+    "build": "npm build --prefix client"
   },
   "dependencies": {
     "express": "^4.17.1"
