@@ -13,6 +13,9 @@
     "build": "yarn workspace client build",
     "test": "yarn workspaces run test"
   },
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  },
   "engines": {
     "node": "16.x",
     "yarn": "1.22.x"
