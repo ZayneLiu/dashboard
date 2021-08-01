@@ -2,13 +2,13 @@ language: node_js
 node:
   - 16
 
-before_install: npm install -g pnpm && pnpm install --prefix client
+before_install: npm install -g yarn
 
 # install any dependencies required
-install: pnpm install
+install: yarn install
 
 # TODO: unit testing
-before_script: pnpm run test && pnpm run test --prefix client && pnpm run build --prefix client
+before_script: yarn test
 
 # run the build script
-script: pnpm run build
+script: yarn build
