@@ -23,20 +23,20 @@ export default class DB {
 		await this.client.close();
 	}
 
-	public async insertUser(doc: any) {
-		return await this.users.insertOne(doc);
+	public insertUser(doc: any) {
+		return this.users.insertOne(doc);
 	}
 
-	public async findUser(filter: any) {
+	public findUser(filter: any) {
 		return this.users.find(filter);
 	}
 
-	public async updateUser(filter: any, doc: any) {
-		return await this.users.updateOne(filter, doc);
+	public updateUser(filter: any, doc: any) {
+		return this.users.updateOne(filter, doc);
 	}
 
-	public async deleteUser(filter: any) {
-		return await this.users.deleteOne(filter);
+	public deleteUser(filter: any) {
+		return this.users.deleteOne(filter);
 	}
 }
 
