@@ -4,10 +4,7 @@
   "description": "dashboard application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts",
-    "client": "yarn start --prefix client",
-    "test": "yarn test --prefix client",
-    "dev": "concurrently 'yarn start' 'yarn run client'"
+    "start": "nodemon index.ts"
   },
   "dependencies": {
     "express": "^4.17.1"
