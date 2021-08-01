@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon index.ts",
     "client": "npm start --prefix client",
+    "test": "npm test --prefix client",
     "dev": "concurrently 'npm start' 'npm run client'",
     "build": "pnpm build --prefix client"
   },
