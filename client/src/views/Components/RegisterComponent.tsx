@@ -88,15 +88,15 @@ export function SignUp() {
 
 	return (
 		<div className="router-view sign-up">
-			<p className="title">Hackathon</p>
 			<div className="form">
+				<p className="title">Hackathon</p>
 				<div className="form-item">
 					<input
 						ref={usernameRef}
 						type="text"
 						name="username"
 						id="username"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="username">Username</label>
@@ -110,7 +110,7 @@ export function SignUp() {
 						type="email"
 						name="email"
 						id="email"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="email">Email</label>
@@ -122,7 +122,7 @@ export function SignUp() {
 						type="password"
 						name="password"
 						id="password"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="password">Password</label>
@@ -136,7 +136,7 @@ export function SignUp() {
 						type="password"
 						name="confirmPassword"
 						id="confirm-password"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="confirmPassword">Confirm Password</label>

@@ -14,23 +14,30 @@ export function Login() {
 
 	return (
 		<div className="router-view login">
-			<p className="title">Hackathon</p>
 			<div className="form">
+				<p className="title">Hackathon</p>
 				<div className="form-item">
-					<input type="text" name="username" id="username" placeholder="" />
+					<input type="text" name="username" id="username" placeholder=" " />
 					<label htmlFor="username">Username</label>
 				</div>
 
 				<div className="spacer" />
 
 				<div className="form-item">
-					<input type="password" name="password" id="password" placeholder="" />
+					<input
+						type="password"
+						name="password"
+						id="password"
+						placeholder=" "
+					/>
 					<label htmlFor="password">Password</label>
 				</div>
 
-				<button onClick={loginBtnOnClick}>
-					<img src={LoginBtnImg} alt="login btn" />
-				</button>
+				<div className="form-item">
+					<button onClick={loginBtnOnClick}>
+						<img src={LoginBtnImg} alt="login btn" />
+					</button>
+				</div>
 			</div>
 
 			<div className="footer">
