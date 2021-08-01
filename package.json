@@ -4,7 +4,7 @@
   "description": "dashboard application",
   "main": "index.js",
   "scripts": {
-    "install": "pnpm install --prefix client",
+    "install": "npm install --prefix client",
     "start": "nodemon index.ts",
     "client": "npm start --prefix client",
     "test": "npm test --prefix client",
