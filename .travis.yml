@@ -4,13 +4,11 @@ node_js:
 
 os: mac
 
-# before_install: npm install -g yarn
-
 # install any dependencies required
 install: yarn install
 
 # TODO: unit testing
-before_script: yarn test
+# before_script: yarn test
 
 # run the build script
 script: yarn build
