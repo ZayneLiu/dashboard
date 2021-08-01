@@ -8,7 +8,7 @@ before_install: npm install -g pnpm
 install: pnpm install
 
 # TODO: unit testing
-before_script: echo "unit test placeholder"
+before_script: pnpm run test
 
 # run the build script
 script: pnpm run build
