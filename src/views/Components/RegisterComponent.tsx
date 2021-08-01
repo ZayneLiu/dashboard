@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import SignUpBtnImg from "../../assets/Register_button.png";
 import AddPicImg from "../../assets/Add_picture.png";
+// import UserModel, { UserSchema } from "./../../models/UserModel";
 
 export function SignUp() {
-	const fileUploadRef = React.createRef<HTMLInputElement>();
+	// setup DB access
+	// const model = new UserModel();
+
+	const profileImgRef = React.createRef<HTMLInputElement>();
 	const usernameRef = React.createRef<HTMLInputElement>();
 	const emailRef = React.createRef<HTMLInputElement>();
 	const passwordRef = React.createRef<HTMLInputElement>();
@@ -35,24 +39,45 @@ export function SignUp() {
 	/**
 	 * Register button onClick
 	 */
-	function signUpBtnOnClick() {
+	async function signUpBtnOnClick() {
+		// validate form
 		if (!isFormValid()) {
 			alert("please provide valid information");
 			return;
 		}
-		// If form is valid
+		// validate confirm password
+		if (passwordRef.current?.value !== confirmPasswordRef.current?.value) {
+			alert("please make sure passwords match");
+			return;
+		}
+
 		// TODO: register
+		// gather user info
+		// const user: UserSchema = {
+		// 	username: usernameRef.current!.value,
+		// 	email: emailRef.current?.value,
+		// 	password: passwordRef.current?.value,
+		// 	profileImg: profileImgRef.current?.value,
+		// };
+
+		// model.setup();
+		// const res = (await model.register(user)).insertedId;
+
+		// const insertedUser = await model.findUser({ _id: res });
+		// console.log(insertedUser);
+
+		// model.cleanup();
 	}
 
 	function addPictureOnClick() {
-		fileUploadRef.current!.click();
+		profileImgRef.current!.click();
 	}
 
 	function pictureUploadOnChange() {
-		if (fileUploadRef.current!.files) {
+		if (profileImgRef.current!.files) {
 			const reader = new FileReader();
 
-			reader.readAsDataURL(fileUploadRef.current!.files[0]);
+			reader.readAsDataURL(profileImgRef.current!.files[0]);
 
 			reader.onload = () => {
 				// Convert image file to BASE64 string.
@@ -120,7 +145,7 @@ export function SignUp() {
 				<div className="form-item horizontal-fill">
 					<div className="add-picture" onClick={addPictureOnClick}>
 						<input
-							ref={fileUploadRef}
+							ref={profileImgRef}
 							onChange={pictureUploadOnChange}
 							type="file"
 							accept="image/*"
