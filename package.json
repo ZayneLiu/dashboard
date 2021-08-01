@@ -10,10 +10,11 @@
   ],
   "scripts": {
     "dev": "concurrently 'yarn workspace server start' 'yarn workspace client start'",
-    "build": "yarn workspace client build"
+    "build": "yarn workspace client build",
+    "test": "yarn workspaces run test"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "private": true
 }
