@@ -5,6 +5,10 @@ import { Home } from "./views/Home";
 import "./App.scss";
 
 function App() {
+	fetch("/api").then(async (res) => {
+		console.log(await res.text());
+	});
+
 	return (
 		<div className="App">
 			<Router basename="/">
