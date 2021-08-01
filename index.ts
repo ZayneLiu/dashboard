@@ -15,7 +15,8 @@ app.get("/api", (req, res) => {
 	res.send({ msg: "/" });
 });
 
-app.post("/api/dashboard");
+app.post("/api/auth/login", (req, res) => {});
+app.post("/api/auth/register", (req, res) => {});
 
 app.use(express.static(path.join(__dirname, "client/build")));
 app.get("*", (req, res) => {
