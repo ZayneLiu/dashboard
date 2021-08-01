@@ -17,10 +17,10 @@ test("[UserModel] registration", async () => {
 		password: "test_password",
 	};
 
-	await model.register(user);
+	const res = await model.register(user);
 	await model.deleteUser(user);
 
-	// expect(sum(1, 2)).toBe(3);
+	expect(res.acknowledged).toBe(true);
 });
 
 test("[UserModel] login", async () => {
@@ -28,7 +28,11 @@ test("[UserModel] login", async () => {
 		email: "tes_email",
 		password: "test_password",
 	};
+	await model.register(user);
 
-	await model.login(user);
-	// expect(sum(1, 2)).toBe(3);
+	const res = await model.login(user);
+
+	await model.deleteUser(user);
+
+	expect(res !== null).toBe(true);
 });

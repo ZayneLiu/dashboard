@@ -15,7 +15,7 @@ export default class UserModel {
 		this.db = new DB();
 	}
 
-	public db!: DB;
+	private db!: DB;
 
 	public async setup() {
 		await this.db.setup();
@@ -29,22 +29,34 @@ export default class UserModel {
 		// TODO: duplicate username or email verification
 		// this.db.find({ username: user.username });
 		// this.db.find({ email: user.email });
+		const { _id, ...registerInfo } = user;
 
-		await this.db.insertUser({ ...user });
+		const res = await this.db.insertUser(registerInfo);
+		return res;
 	}
 
-	public async login(user: UserSchema) {
-		const { _id, username, ...loginInfo } = user;
+	public async login(user: UserSchema): Promise<UserSchema | null> {
+		const { _id, username, profileImg, ...loginInfo } = user;
 
-		const res = await this.db.findUser(loginInfo);
+		const res = await this.db.findUser(loginInfo).toArray<UserSchema>();
 
-		console.log(await res.toArray());
+		if (res.length > 0) {
+			// record match, login successful
+			const { password, ...restUserInfo } = res[0];
+			return restUserInfo;
+		} else {
+			// Invalid username / password
+			return null;
+		}
 	}
 
-	public async deleteUser(user: UserSchema) {
+	public async findUser(user: UserSchema) {
+		return await this.db.findUser(user);
+	}
+	public async deleteUser(user: UserSchema): Promise<number> {
 		const { _id, ...userInfo } = user;
 
-		await this.db.deleteUser(userInfo);
+		return (await this.db.deleteUser(userInfo)).deletedCount;
 	}
 }
 

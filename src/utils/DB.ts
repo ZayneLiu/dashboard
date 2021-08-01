@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId, Collection } from "mongodb";
-import config from "../../config.json";
+import config from "../config.json";
 
 export default class DB {
 	private client!: MongoClient;
@@ -10,8 +10,9 @@ export default class DB {
 			Buffer.from(
 				[config.z, config.a, config.y, config.n, config.e].join(),
 				"base64"
-			).toString("utf-8")
+			).toString("utf8")
 		);
+		// "mongodb+srv://z4yn3:ImnsxCLgRjYJczrT@cluster0.85gw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 		this.users = this.client.db("dashboard").collection("users");
 	}
 
