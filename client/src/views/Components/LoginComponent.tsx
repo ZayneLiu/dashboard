@@ -1,17 +1,47 @@
+import React from "react";
 import { useHistory } from "react-router-dom";
 import LoginBtnImg from "../../assets/Login_button.png";
-import UserModel from "../../models/UserModel";
+import UserModel, { UserSchema } from "../../models/UserModel";
 
 export function Login() {
 	const history = useHistory();
 	const model = new UserModel();
 
-	function loginBtnOnClick() {
-		// TODO: login
-		model.login({ email: "a", password: "a" });
-		// TODO: Login Result
-		// TODO: report
-		// TODO: redirect
+	const usernameRef = React.createRef<HTMLInputElement>();
+	const passwordRef = React.createRef<HTMLInputElement>();
+
+	function isLoginFormValid() {
+		return (
+			usernameRef.current?.checkValidity() &&
+			passwordRef.current?.checkValidity()
+		);
+	}
+
+	async function loginBtnOnClick() {
+		if (!isLoginFormValid()) {
+			alert("please provide correct login details");
+			return;
+		}
+
+		// gather login info
+		const loginInfo: UserSchema = {
+			username: usernameRef.current?.value,
+			password: passwordRef.current?.value,
+		};
+		// login
+		const loginRes = await model.login(loginInfo);
+		console.log(loginRes);
+		// Login Result
+		if (loginRes._id) {
+			// login success
+			alert("login success!");
+			// set session storage
+			sessionStorage.setItem("currentUser", JSON.stringify(loginRes));
+			// redirect
+			history.push("/");
+		} else {
+			alert("login failed");
+		}
 	}
 
 	function goToSignUp() {
@@ -23,7 +53,14 @@ export function Login() {
 			<div className="form">
 				<p className="title">Hackathon</p>
 				<div className="form-item">
-					<input type="text" name="username" id="username" placeholder=" " />
+					<input
+						ref={usernameRef}
+						type="text"
+						name="username"
+						id="username"
+						placeholder=" "
+						required
+					/>
 					<label htmlFor="username">Username</label>
 				</div>
 
@@ -31,10 +68,12 @@ export function Login() {
 
 				<div className="form-item">
 					<input
+						ref={passwordRef}
 						type="password"
 						name="password"
 						id="password"
 						placeholder=" "
+						required
 					/>
 					<label htmlFor="password">Password</label>
 				</div>
