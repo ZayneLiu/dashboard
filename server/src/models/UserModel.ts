@@ -36,7 +36,7 @@ export default class UserModel {
 	}
 
 	public async login(user: UserSchema): Promise<UserSchema | null> {
-		const { _id, username, profileImg, ...loginInfo } = user;
+		const { _id, email, profileImg, ...loginInfo } = user;
 
 		const res = await this.db.findUser(loginInfo).toArray<UserSchema>();
 

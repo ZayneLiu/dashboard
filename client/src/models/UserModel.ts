@@ -12,32 +12,32 @@ class UserSchema {
 export default class UserModel {
 	public async register(user: UserSchema) {
 		const { _id, ...registerInfo } = user;
-		console.log(
-			(
-				await fetch("/api/register", {
-					method: "POST",
-					headers: {
-						"Content-type": "application/json; charset=UTF-8",
-					},
-					body: JSON.stringify(registerInfo),
-				})
-			).json()
-		);
 
-		// console.log(await res.json());
+		return (
+			await fetch("/api/register", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json; charset=UTF-8",
+				},
+				body: JSON.stringify(registerInfo),
+			})
+		).json();
 	}
 	public async login(user: UserSchema) {
-		const { _id, profileImg, username, ...loginInfo } = user;
-		fetch("/api/login", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json; charset=UTF-8",
-			},
-			body: JSON.stringify(loginInfo),
-		});
+		const { _id, profileImg, email, ...loginInfo } = user;
+
+		return (
+			await fetch("/api/login", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json; charset=UTF-8",
+				},
+				body: JSON.stringify(loginInfo),
+			})
+		).json();
 	}
 	public async getUserProfile(user: UserSchema) {}
 	public async deleteUser(user: UserSchema) {}
 }
 
-export { UserSchema };
+export { UserSchema, ObjectId };
