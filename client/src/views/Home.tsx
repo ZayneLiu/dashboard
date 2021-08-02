@@ -10,19 +10,13 @@ export function Home() {
 	if (!currentUser) history.push("/login");
 
 	// useEffect(() => {});
+	function getUsername() {
+		return JSON.parse(sessionStorage.getItem("currentUser")!).username;
+	}
 
 	return (
 		<div className="router-view ">
-			<p>
-				Edit <code>src/App.tsx</code> and save to reload.
-			</p>
-			<a
-				className="App-link"
-				href="https://reactjs.org"
-				target="_blank"
-				rel="noopener noreferrer">
-				Learn React
-			</a>
+			<h1>Good day {getUsername()}</h1>
 		</div>
 	);
 }
