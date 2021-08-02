@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import SignUpBtnImg from "../../assets/Register_button.png";
 import AddPicImg from "../../assets/Add_picture.png";
 import UserModel, { UserSchema } from "./../../models/UserModel";
 
 export function SignUp() {
+	// router
+	const history = useHistory();
 	// setup DB access
 	const model = new UserModel();
 
@@ -56,17 +59,26 @@ export function SignUp() {
 			username: usernameRef.current!.value,
 			email: emailRef.current?.value,
 			password: passwordRef.current?.value,
-			profileImg: selectedImg,
 		};
 		// FIXME: file upload
+		// profileImg: selectedImg,
 		console.log(selectedImg);
 
 		// register user
-		model.register(user);
+		const { insertedId } = await model.register(user);
 
-		// TODO: registration result
-		// TODO: report
-		// TODO: redirect
+		if (insertedId) {
+			// TODO: register complete
+			console.log(insertedId);
+			// report
+			alert("registration complete. please login");
+			// redirect
+			history.push("/login");
+		} else {
+			// TODO: register failed
+			alert("registration failed!");
+			return;
+		}
 	}
 
 	function addPictureOnClick() {
