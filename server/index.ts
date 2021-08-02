@@ -1,7 +1,7 @@
 import express from "express";
 import { json } from "body-parser";
 import path from "path";
-import { UserSchema } from "./src/models/UserModel";
+import UserModel, { UserSchema } from "./src/models/UserModel";
 
 // rest of the code remains same
 const app = express();
@@ -14,20 +14,33 @@ app.get("/api", (req, res) => {
 	res.send({ msg: "/" });
 });
 
+const model = new UserModel();
+
 // TODO: File upload
 
-app.post("/api/register", (req, res) => {
+app.post("/api/register", async (req, res) => {
 	const data: UserSchema = req.body;
 	const { _id, ...registerInfo } = data;
-	// TODO:
-	console.log(registerInfo);
+
+	// TODO: check duplicates accounts
+
+	await model.setup();
+	const insertRes = await model.register(registerInfo);
+	await model.cleanup();
+
+	res.json(insertRes);
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
 	const data: UserSchema = req.body;
-	const { _id, username, profileImg, ...loginInfo } = data;
+	const { _id, email, profileImg, ...loginInfo } = data;
 	// TODO:
+	await model.setup();
+	const loginRes = await model.login(loginInfo);
+	await model.cleanup();
 	console.log(loginInfo);
+
+	res.json(loginRes);
 });
 
 // `catch-all` route to serve react app
