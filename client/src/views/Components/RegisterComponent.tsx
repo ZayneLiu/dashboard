@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import SignUpBtnImg from "../../assets/Register_button.png";
 import AddPicImg from "../../assets/Add_picture.png";
-// import UserModel, { UserSchema } from "./../../models/UserModel";
+import UserModel, { UserSchema } from "./../../models/UserModel";
 
 export function SignUp() {
 	// setup DB access
-	// const model = new UserModel();
+	const model = new UserModel();
 
 	const profileImgRef = React.createRef<HTMLInputElement>();
 	const usernameRef = React.createRef<HTMLInputElement>();
@@ -13,7 +13,7 @@ export function SignUp() {
 	const passwordRef = React.createRef<HTMLInputElement>();
 	const confirmPasswordRef = React.createRef<HTMLInputElement>();
 
-	let [selectedImg, setSelectedImg] = useState("");
+	let [selectedImg, setSelectedImg] = useState(" ");
 
 	/**
 	 * form validation
@@ -51,22 +51,22 @@ export function SignUp() {
 			return;
 		}
 
-		// TODO: register
 		// gather user info
-		// const user: UserSchema = {
-		// 	username: usernameRef.current!.value,
-		// 	email: emailRef.current?.value,
-		// 	password: passwordRef.current?.value,
-		// 	profileImg: profileImgRef.current?.value,
-		// };
+		const user: UserSchema = {
+			username: usernameRef.current!.value,
+			email: emailRef.current?.value,
+			password: passwordRef.current?.value,
+			profileImg: selectedImg,
+		};
+		// FIXME: file upload
+		console.log(selectedImg);
 
-		// model.setup();
-		// const res = (await model.register(user)).insertedId;
+		// register user
+		model.register(user);
 
-		// const insertedUser = await model.findUser({ _id: res });
-		// console.log(insertedUser);
-
-		// model.cleanup();
+		// TODO: registration result
+		// TODO: report
+		// TODO: redirect
 	}
 
 	function addPictureOnClick() {

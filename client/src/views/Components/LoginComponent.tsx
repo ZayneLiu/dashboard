@@ -1,11 +1,17 @@
 import { useHistory } from "react-router-dom";
 import LoginBtnImg from "../../assets/Login_button.png";
+import UserModel from "../../models/UserModel";
 
 export function Login() {
 	const history = useHistory();
+	const model = new UserModel();
 
 	function loginBtnOnClick() {
-		console.log(1);
+		// TODO: login
+		model.login({ email: "a", password: "a" });
+		// TODO: Login Result
+		// TODO: report
+		// TODO: redirect
 	}
 
 	function goToSignUp() {
