@@ -32,7 +32,7 @@ export function Sport(props: any) {
 	}
 
 	return (
-		<div className="sport-page">
+		<div className="sport-page router-view">
 			<p className="title">Sport</p>
 			<div className="form-item">
 				<input

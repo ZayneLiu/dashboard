@@ -33,7 +33,7 @@ export function News(props: any) {
 	// });
 
 	return (
-		<div className="news-page">
+		<div className="news-page router-view">
 			<h2 className="title">News</h2>
 			<p className="headline">{news?.title}</p>
 			<p className="description">{news?.description}</p>
