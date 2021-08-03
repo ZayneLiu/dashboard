@@ -8,10 +8,10 @@ import SunIcon from "../assets/Sun_icon.png";
 import { DashboardModel } from "../models/DashboardModel";
 import AddPicture from "./../assets/Add_picture.png";
 
-const currentUser = sessionStorage.getItem("currentUser");
 export function Home() {
 	const history = useHistory();
 
+	const currentUser = sessionStorage.getItem("currentUser");
 	if (!currentUser) history.push("/login");
 
 	const model = new DashboardModel();

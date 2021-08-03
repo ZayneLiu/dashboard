@@ -36,7 +36,7 @@ export function Login() {
 			// set session storage
 			sessionStorage.setItem("currentUser", JSON.stringify(loginRes));
 			// login success
-			alert("login success!");
+			// alert("login success!");
 			// redirect
 			history.push("/");
 		} else {
