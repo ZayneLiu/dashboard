@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import SignUpBtnImg from "../../assets/Register_button.png";
 import AddPicImg from "../../assets/Add_picture.png";
-// import UserModel, { UserSchema } from "./../../models/UserModel";
+import UserModel, { UserSchema } from "./../../models/UserModel";
 
 export function SignUp() {
+	// router
+	const history = useHistory();
 	// setup DB access
-	// const model = new UserModel();
+	const model = new UserModel();
 
 	const profileImgRef = React.createRef<HTMLInputElement>();
 	const usernameRef = React.createRef<HTMLInputElement>();
@@ -13,7 +16,7 @@ export function SignUp() {
 	const passwordRef = React.createRef<HTMLInputElement>();
 	const confirmPasswordRef = React.createRef<HTMLInputElement>();
 
-	let [selectedImg, setSelectedImg] = useState("");
+	let [selectedImg, setSelectedImg] = useState(" ");
 
 	/**
 	 * form validation
@@ -51,22 +54,31 @@ export function SignUp() {
 			return;
 		}
 
-		// TODO: register
 		// gather user info
-		// const user: UserSchema = {
-		// 	username: usernameRef.current!.value,
-		// 	email: emailRef.current?.value,
-		// 	password: passwordRef.current?.value,
-		// 	profileImg: profileImgRef.current?.value,
-		// };
+		const user: UserSchema = {
+			username: usernameRef.current!.value,
+			email: emailRef.current?.value,
+			password: passwordRef.current?.value,
+		};
+		// FIXME: file upload
+		// profileImg: selectedImg,
+		console.log(selectedImg);
 
-		// model.setup();
-		// const res = (await model.register(user)).insertedId;
+		// register user
+		const { insertedId } = await model.register(user);
 
-		// const insertedUser = await model.findUser({ _id: res });
-		// console.log(insertedUser);
-
-		// model.cleanup();
+		if (insertedId) {
+			// TODO: register complete
+			console.log(insertedId);
+			// report
+			alert("registration complete. please login");
+			// redirect
+			history.push("/login");
+		} else {
+			// TODO: register failed
+			alert("registration failed!");
+			return;
+		}
 	}
 
 	function addPictureOnClick() {
@@ -88,15 +100,15 @@ export function SignUp() {
 
 	return (
 		<div className="router-view sign-up">
-			<p className="title">Hackathon</p>
 			<div className="form">
+				<p className="title">Hackathon</p>
 				<div className="form-item">
 					<input
 						ref={usernameRef}
 						type="text"
 						name="username"
 						id="username"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="username">Username</label>
@@ -110,7 +122,7 @@ export function SignUp() {
 						type="email"
 						name="email"
 						id="email"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="email">Email</label>
@@ -122,7 +134,7 @@ export function SignUp() {
 						type="password"
 						name="password"
 						id="password"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="password">Password</label>
@@ -136,7 +148,7 @@ export function SignUp() {
 						type="password"
 						name="confirmPassword"
 						id="confirm-password"
-						placeholder=""
+						placeholder=" "
 						required
 					/>
 					<label htmlFor="confirmPassword">Confirm Password</label>
