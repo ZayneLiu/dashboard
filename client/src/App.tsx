@@ -5,23 +5,19 @@ import { Home } from "./views/Home";
 import "./App.scss";
 
 function App() {
-	fetch("/api").then(async (res) => {
-		console.log(await res.text());
-	});
-
 	return (
 		<div className="App">
 			<Router basename="/">
-				{/* <Link to="/">Home</Link>
-			<Link to="login">Login</Link> */}
-				<Route exact path="/">
-					<Home></Home>
-				</Route>
 				<Route exact path="/login">
 					<Auth isRegister={false} />
 				</Route>
+
 				<Route exact path="/sign-up">
 					<Auth isRegister={true} />
+				</Route>
+
+				<Route path="/">
+					<Home></Home>
 				</Route>
 			</Router>
 		</div>

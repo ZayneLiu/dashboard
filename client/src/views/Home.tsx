@@ -1,16 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./Home.scss";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
+import { News } from "./News";
+import { Sport } from "./Sport";
 
+import "./Home.scss";
 import CloudsIcon from "../assets/Clouds_icon.png";
 
+const currentUser = sessionStorage.getItem("currentUser");
 export function Home() {
 	const history = useHistory();
 
-	const currentUser = sessionStorage.getItem("currentUser");
 	console.log(currentUser);
 	// redirect to login page if no current user in session storage
 	if (!currentUser) history.push("/login");
+
+	return (
+		<div className="router-view dashboard">
+			<Router>
+				<Route exact path="/">
+					<HomePage />
+				</Route>
+
+				<Route exact path="/news">
+					<News></News>
+				</Route>
+
+				<Route exact path="/sport">
+					<Sport></Sport>
+				</Route>
+			</Router>
+		</div>
+	);
+}
+
+function HomePage() {
+	const history = useHistory();
 
 	const [weather, setWeather] = useState<{ name: string; main: any }>({
 		name: "loading",
@@ -75,16 +99,21 @@ export function Home() {
 		return JSON.parse(sessionStorage.getItem("currentUser")!).username;
 	}
 
+	function logout() {
+		sessionStorage.removeItem("currentUser");
+		history.push("/login");
+	}
+
 	return (
-		<div className="router-view dashboard">
+		<>
 			<div className="header">
 				<img src="https://via.placeholder.com/100" alt="" />
 				<h1>Good day {getUsername()}</h1>
-				<button>Logout</button>
+				<button onClick={logout}>Logout</button>
 			</div>
 			<main>
 				<div className="dashboard-item">
-					<h2 className="dashboard-item_title">Weather</h2>
+					<h2 className="title">Weather</h2>
 					<div className="content">
 						<div>
 							<img src={CloudsIcon} alt="" />
@@ -93,17 +122,52 @@ export function Home() {
 						<div className="city-name">{weather?.name}</div>
 					</div>
 				</div>
+
 				<div className="dashboard-item">
-					<h2 className="dashboard-item_title">News</h2>
+					<h2
+						className="title"
+						onClick={() => {
+							history.push("/news");
+						}}>
+						News <span style={{ fontSize: 12 }}>[click]</span>
+					</h2>
 					<div className="content">
-						<h4>News headline</h4>
-						<p>{news.title}</p>
-						<a href={news.link}>
-							<i> link to headline</i>
-						</a>
+						<p className="headline">{news.title}</p>
+						<p className="description"> {news.description}</p>
 					</div>
 				</div>
+
+				<div className="dashboard-item">
+					<h2
+						className="title"
+						onClick={() => {
+							history.push("/sport");
+						}}>
+						Sport <span style={{ fontSize: 12 }}>[click]</span>
+					</h2>
+					<div className="content">
+						<h4>Sport headline</h4>
+					</div>
+				</div>
+				<div className="dashboard-item">
+					<h2 className="title">
+						Photos <span style={{ fontSize: 12 }}>[click]</span>
+					</h2>
+					<div className="content"></div>
+				</div>
+				<div className="dashboard-item">
+					<h2 className="title">
+						Tasks <span style={{ fontSize: 12 }}>[click]</span>
+					</h2>
+					<div className="content"></div>
+				</div>
+				<div className="dashboard-item">
+					<h2 className="title">
+						Clothes <span style={{ fontSize: 12 }}>[click]</span>
+					</h2>
+					<div className="content"></div>
+				</div>
 			</main>
-		</div>
+		</>
 	);
 }
