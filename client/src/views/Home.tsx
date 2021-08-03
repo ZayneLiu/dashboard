@@ -34,13 +34,10 @@ export function Home() {
 
 	function getWeather(location: GeolocationPosition) {
 		const { latitude, longitude } = location.coords;
-		fetch(
-			`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=541e426aa47c6281aad333b4d7b0ba76`,
-			{
-				method: "GET",
-				headers: {},
-			}
-		).then((response) => {
+		const key = "541e426aa47c6281aad333b4d7b0ba76";
+		const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${key}`;
+
+		fetch(url).then((response) => {
 			console.log("api");
 			console.log(weather);
 
