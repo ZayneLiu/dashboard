@@ -1,0 +1,97 @@
+.dashboard {
+	.header {
+		width: calc(100% - 20px);
+
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px;
+
+		button {
+			font-family: inherit;
+			color: inherit;
+			font-size: inherit;
+
+			appearance: none;
+			background-color: transparent;
+			border: 0;
+			cursor: pointer;
+		}
+	}
+	main {
+		padding: 10px;
+
+		width: 1200px;
+
+		// width: 90%;
+		flex: 1;
+		display: flex;
+
+		flex-flow: row wrap;
+		align-items: flex-start;
+		justify-content: center;
+
+		color: black !important;
+
+		.dashboard-item {
+			margin: 15px 30px;
+
+			width: 28%;
+			height: 246px;
+			background: url("../assets/Container.png") no-repeat;
+
+			background-size: cover;
+			display: flex;
+			flex-flow: column nowrap;
+
+			h2 {
+				color: black;
+
+				margin: 10px;
+			}
+
+			h4 {
+				margin: 10px;
+			}
+
+			p {
+				margin-top: 5px;
+				font-size: 20px;
+			}
+			.content {
+				// DEBUG
+				// background-color: #fff;
+
+				flex: 1;
+				margin: 3px;
+				padding: 5px;
+				display: flex;
+				flex-flow: column nowrap;
+
+				& > div {
+					display: flex;
+					flex-flow: row nowrap;
+					align-items: center;
+					justify-content: space-between;
+
+					img {
+						width: 120px;
+					}
+					.temperature {
+						flex: 1;
+						font-size: 30px;
+					}
+				}
+				.city-name {
+					flex: 1;
+					display: flex;
+					flex-flow: row;
+					justify-content: center;
+					align-items: center;
+					font-size: 40px;
+				}
+			}
+		}
+	}
+}
