@@ -33,10 +33,10 @@ export function Login() {
 		console.log(loginRes);
 		// Login Result
 		if (loginRes._id) {
-			// login success
-			alert("login success!");
 			// set session storage
 			sessionStorage.setItem("currentUser", JSON.stringify(loginRes));
+			// login success
+			alert("login success!");
 			// redirect
 			history.push("/");
 		} else {
