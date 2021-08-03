@@ -16,6 +16,15 @@ export function Home() {
 		name: "loading",
 		main: { temp: "loading" },
 	});
+	const [news, setNews] = useState<{
+		title: string;
+		description: string;
+		link: string;
+	}>({
+		title: "loading",
+		description: "",
+		link: "",
+	});
 
 	useEffect(() => {
 		if (weather.name !== "loading") return;
@@ -27,6 +36,12 @@ export function Home() {
 		} else {
 			alert("Geolocation is not supported by this browser.");
 		}
+	});
+
+	useEffect(() => {
+		if (news.title !== "loading") return;
+
+		getNews();
 	});
 
 	function getWeather(location: GeolocationPosition) {
@@ -45,6 +60,16 @@ export function Home() {
 		});
 	}
 
+	function getNews() {
+		fetch("/api/news", {
+			method: "GET",
+			headers: {},
+		}).then((response) => {
+			response.json().then((json) => {
+				setNews(json[0]);
+			});
+		});
+	}
 	function getUsername() {
 		if (!currentUser) return;
 		return JSON.parse(sessionStorage.getItem("currentUser")!).username;
@@ -66,6 +91,16 @@ export function Home() {
 							<div className="temperature">{weather?.main.temp} &deg;C</div>
 						</div>
 						<div className="city-name">{weather?.name}</div>
+					</div>
+				</div>
+				<div className="dashboard-item">
+					<h2 className="dashboard-item_title">News</h2>
+					<div className="content">
+						<h4>News headline</h4>
+						<p>{news.title}</p>
+						<a href={news.link}>
+							<i> link to headline</i>
+						</a>
 					</div>
 				</div>
 			</main>
