@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-	BrowserRouter as Router,
-	Link,
-	Route,
-	useHistory,
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./Home.scss";
 import CloudsIcon from "../assets/Clouds_icon.png";
@@ -57,6 +52,7 @@ export function Home() {
 							setWeatherIconUrl(
 								`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
 							);
+							console.log(weatherIconUrl);
 						}
 					})
 			);
