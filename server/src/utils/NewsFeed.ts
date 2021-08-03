@@ -9,3 +9,12 @@ export async function getNewsFeed() {
 
 	return parse(res.data).rss.channel.item;
 }
+export async function getNewsByUrl(url: string) {
+	// TODO: web scraping
+
+	const res = await Axios(url, {
+		method: "GET",
+		headers: {},
+	});
+	return res.data;
+}
