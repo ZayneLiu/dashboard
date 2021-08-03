@@ -4,6 +4,7 @@ import path from "path";
 import UserModel, { UserSchema } from "./src/models/UserModel";
 import { getSportData } from "./src/utils/SportData";
 import { getNewsFeed } from "./src/utils/NewsFeed";
+import { getNewsByUrl, getNewsFeed } from "./src/utils/NewsFeed";
 
 // rest of the code remains same
 const app = express();
@@ -50,6 +51,11 @@ app.get("/api/sport", async (req, res) => {
 
 app.get("/api/news", async (req, res) => {
 	res.json(await getNewsFeed());
+});
+
+app.get("/api/news/:newsId", async (req, res) => {
+	const url = Buffer.from(req.params["newsId"], "base64").toString("utf-8");
+	res.json(await getNewsByUrl(url));
 });
 
 // `catch-all` route to serve react app
