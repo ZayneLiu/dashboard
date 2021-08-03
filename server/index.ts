@@ -36,7 +36,7 @@ app.post("/api/register", async (req, res) => {
 app.post("/api/login", async (req, res) => {
 	const data: UserSchema = req.body;
 	const { _id, email, profileImg, ...loginInfo } = data;
-	// TODO:
+
 	await model.setup();
 	const loginRes = await model.login(loginInfo);
 	await model.cleanup();
