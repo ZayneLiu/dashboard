@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { DashboardModel } from "../models/DashboardModel";
 
 export function Sport(props: any) {
 	const history = useHistory();
+
+	const model = new DashboardModel();
 
 	const teamNameRef = React.createRef<HTMLInputElement>();
 
@@ -12,11 +15,8 @@ export function Sport(props: any) {
 
 	useEffect(() => {
 		if (sportData) return;
-
-		fetch("/api/sport").then((res) => {
-			res.json().then((json) => {
-				setSportData(json);
-			});
+		model.getSportData().then((json) => {
+			setSportData(json);
 		});
 	});
 

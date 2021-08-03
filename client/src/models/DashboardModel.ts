@@ -12,8 +12,11 @@ export class DashboardModel {
 			method: "GET",
 			headers: {},
 		});
-		return await res.json();
+		return res.json();
 	}
 
-	public async getSportData() {}
+	public async getSportData() {
+		const res = await fetch("/api/sport");
+		return res.json();
+	}
 }
