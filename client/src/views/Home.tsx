@@ -19,13 +19,10 @@ export function Home() {
 
 	useEffect(() => {
 		if (weather.name !== "loading") return;
+
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
-				(location: GeolocationPosition) => {
-					console.log(location);
-
-					getWeather(location);
-				}
+				(location: GeolocationPosition) => getWeather(location)
 			);
 		} else {
 			alert("Geolocation is not supported by this browser.");
@@ -38,15 +35,10 @@ export function Home() {
 		const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${key}`;
 
 		fetch(url).then((response) => {
-			console.log("api");
-			console.log(weather);
-
 			response.json().then((json) => {
 				const { name, main } = json;
-				console.log(json);
 
 				if (weather.name === "loading") {
-					console.log(name);
 					setWeather({ name, main });
 				}
 			});
