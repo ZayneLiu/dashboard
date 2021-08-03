@@ -37,7 +37,7 @@ export function News(props: any) {
 			<h2 className="title">News</h2>
 			<p className="headline">{news?.title}</p>
 			<p className="description">{news?.description}</p>
-			<a href={news?.link} target="_blank">
+			<a href={news?.link} rel="noreferrer" target="_blank">
 				find more on BBC
 			</a>
 			<br />
