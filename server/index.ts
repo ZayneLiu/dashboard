@@ -3,7 +3,6 @@ import { json } from "body-parser";
 import path from "path";
 import UserModel, { UserSchema } from "./src/models/UserModel";
 import { getSportData } from "./src/utils/SportData";
-import { getNewsFeed } from "./src/utils/NewsFeed";
 import { getNewsByUrl, getNewsFeed } from "./src/utils/NewsFeed";
 
 // rest of the code remains same
