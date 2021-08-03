@@ -2,6 +2,8 @@ import express from "express";
 import { json } from "body-parser";
 import path from "path";
 import UserModel, { UserSchema } from "./src/models/UserModel";
+import { getSportData } from "./src/utils/SportData";
+import { getNewsFeed } from "./src/utils/NewsFeed";
 
 // rest of the code remains same
 const app = express();
@@ -38,9 +40,16 @@ app.post("/api/login", async (req, res) => {
 	await model.setup();
 	const loginRes = await model.login(loginInfo);
 	await model.cleanup();
-	console.log(loginInfo);
 
 	res.json(loginRes);
+});
+
+app.get("/api/sport", async (req, res) => {
+	res.json(await getSportData(""));
+});
+
+app.get("/api/news", async (req, res) => {
+	res.json(await getNewsFeed());
 });
 
 // `catch-all` route to serve react app
