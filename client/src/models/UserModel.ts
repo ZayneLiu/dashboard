@@ -10,8 +10,20 @@ class UserSchema {
 }
 
 export default class UserModel {
-	public async register(user: UserSchema) {
+	public async register(user: UserSchema, img: File) {
 		const { _id, ...registerInfo } = user;
+
+		const formData = new FormData();
+		formData.append("profileImg", img);
+
+		const res = await fetch("/upload", {
+			method: "POST",
+			body: formData,
+		});
+
+		const { profileImg } = await res.json();
+
+		registerInfo.profileImg = profileImg;
 
 		return (
 			await fetch("/api/register", {
