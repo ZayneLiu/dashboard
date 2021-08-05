@@ -12,9 +12,8 @@ import "./Home.scss";
 export function Home() {
 	const history = useHistory();
 
-	if (!sessionStorage.getItem("currentUser")) {
-		history.push("/login");
-	}
+	if (!sessionStorage.getItem("currentUser")) history.push("/login");
+
 	let currentUser = JSON.parse(
 		sessionStorage.getItem("currentUser")!
 	) as UserSchema;
@@ -89,9 +88,12 @@ export function Home() {
 		<div className="router-view dashboard">
 			<div className="header">
 				<div className="profileImg">
-					<img src={`/image/${currentUser.profileImg}`} alt="" />
+					<img
+						src={`/image/${currentUser ? currentUser.profileImg : ""}`}
+						alt=""
+					/>
 				</div>
-				<h1>Good day {currentUser.username}</h1>
+				<h1>Good day {currentUser ? currentUser.username : ""}</h1>
 				<button onClick={logout}>Logout</button>
 			</div>
 			<main>
