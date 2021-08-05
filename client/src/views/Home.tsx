@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./Home.scss";
-import CloudsIcon from "../assets/Clouds_icon.png";
-import RainIcon from "../assets/Rain_icon.png";
-import SunIcon from "../assets/Sun_icon.png";
 import { DashboardModel } from "../models/DashboardModel";
 import AddPicture from "./../assets/Add_picture.png";
+import { UserSchema } from "../models/UserModel";
+import "./Home.scss";
+// import CloudsIcon from "../assets/Clouds_icon.png";
+// import RainIcon from "../assets/Rain_icon.png";
+// import SunIcon from "../assets/Sun_icon.png";
 
 export function Home() {
 	const history = useHistory();
 
-	const currentUser = sessionStorage.getItem("currentUser");
+	let currentUser: string | null | UserSchema =
+		sessionStorage.getItem("currentUser");
 	if (!currentUser) history.push("/login");
+
+	currentUser = JSON.parse(
+		sessionStorage.getItem("currentUser")!
+	) as UserSchema;
 
 	const model = new DashboardModel();
 
@@ -69,16 +75,11 @@ export function Home() {
 		});
 	});
 
-	function getWeatherIcon() {
-		if (weatherRetrieved.weather[0]?.main === "Rain") return RainIcon;
-		if (weatherRetrieved.weather[0]?.main === "Clear") return SunIcon;
-		if (weatherRetrieved.weather[0]?.main === "Clouds") return CloudsIcon;
-	}
-
-	function getUsername() {
-		if (!currentUser) return;
-		return JSON.parse(sessionStorage.getItem("currentUser")!).username;
-	}
+	// function getWeatherIcon() {
+	// 	if (weatherRetrieved.weather[0]?.main === "Rain") return RainIcon;
+	// 	if (weatherRetrieved.weather[0]?.main === "Clear") return SunIcon;
+	// 	if (weatherRetrieved.weather[0]?.main === "Clouds") return CloudsIcon;
+	// }
 
 	function logout() {
 		sessionStorage.removeItem("currentUser");
@@ -88,8 +89,10 @@ export function Home() {
 	return (
 		<div className="router-view dashboard">
 			<div className="header">
-				<img src="https://via.placeholder.com/100" alt="" />
-				<h1>Good day {getUsername()}</h1>
+				<div className="profileImg">
+					<img src={`/image/${currentUser.profileImg}`} alt="" />
+				</div>
+				<h1>Good day {currentUser.username}</h1>
 				<button onClick={logout}>Logout</button>
 			</div>
 			<main>
@@ -98,8 +101,8 @@ export function Home() {
 					<div className="content">
 						<div>
 							{/* get icon from open weather API */}
-							{/* <img src={weatherIconUrl} alt="" /> */}
-							<img src={getWeatherIcon()} alt="" />
+							<img src={weatherIconUrl} alt="" />
+							{/* <img src={getWeatherIcon()} alt="" /> */}
 							<div className="temperature">
 								{weatherRetrieved?.main.temp} &deg;C
 							</div>
