@@ -12,11 +12,10 @@ import "./Home.scss";
 export function Home() {
 	const history = useHistory();
 
-	let currentUser: string | null | UserSchema =
-		sessionStorage.getItem("currentUser");
-	if (!currentUser) history.push("/login");
-
-	currentUser = JSON.parse(
+	if (!sessionStorage.getItem("currentUser")) {
+		history.push("/login");
+	}
+	let currentUser = JSON.parse(
 		sessionStorage.getItem("currentUser")!
 	) as UserSchema;
 
