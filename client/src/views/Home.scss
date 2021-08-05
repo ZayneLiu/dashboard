@@ -7,7 +7,17 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 10px;
+		.profileImg {
+			height: 100px;
+			width: 100px;
+			overflow: hidden;
+			border-radius: 10px;
+			border: #e3e3e3 3px solid;
 
+			img {
+				width: 100px;
+			}
+		}
 		button {
 			font-family: inherit;
 			color: inherit;
