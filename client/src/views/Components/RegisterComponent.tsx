@@ -16,7 +16,8 @@ export function SignUp() {
 	const passwordRef = React.createRef<HTMLInputElement>();
 	const confirmPasswordRef = React.createRef<HTMLInputElement>();
 
-	let [selectedImg, setSelectedImg] = useState(" ");
+	let [selectedImg, setSelectedImg] = useState<File>();
+	let [selectedImgPreview, setSelectedImgPreview] = useState<string>(" ");
 
 	/**
 	 * form validation
@@ -60,12 +61,16 @@ export function SignUp() {
 			email: emailRef.current?.value,
 			password: passwordRef.current?.value,
 		};
+
 		// FIXME: file upload
 		// profileImg: selectedImg,
-		console.log(selectedImg);
+		if (!selectedImg) {
+			alert("please choose a profile image");
+			return;
+		}
 
 		// register user
-		const { insertedId } = await model.register(user);
+		const { insertedId } = await model.register(user, selectedImg);
 
 		if (insertedId) {
 			// TODO: register complete
@@ -74,6 +79,7 @@ export function SignUp() {
 			alert("registration complete. please login");
 			// redirect
 			history.push("/login");
+			return;
 		} else {
 			// TODO: register failed
 			alert("registration failed!");
@@ -86,16 +92,14 @@ export function SignUp() {
 	}
 
 	function pictureUploadOnChange() {
-		if (profileImgRef.current!.files) {
-			const reader = new FileReader();
+		setSelectedImg(profileImgRef.current!.files![0]);
 
-			reader.readAsDataURL(profileImgRef.current!.files[0]);
-
-			reader.onload = () => {
-				// Convert image file to BASE64 string.
-				setSelectedImg(reader.result!.toString());
-			};
-		}
+		// Convert image file to BASE64 string for previewing.
+		const reader = new FileReader();
+		reader.readAsDataURL(profileImgRef.current!.files![0]);
+		reader.onload = () => {
+			setSelectedImgPreview(reader.result!.toString());
+		};
 	}
 
 	return (
@@ -168,7 +172,7 @@ export function SignUp() {
 						<img src={AddPicImg} alt="add_picture_btn" />
 						<span>Add Picture</span>
 
-						<img src={selectedImg} alt="" />
+						<img src={selectedImgPreview} alt="" />
 					</div>
 				</div>
 
