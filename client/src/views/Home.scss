@@ -13,7 +13,10 @@
 			overflow: hidden;
 			border-radius: 10px;
 			border: #e3e3e3 3px solid;
-
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			align-items: center;
 			img {
 				width: 100px;
 			}
