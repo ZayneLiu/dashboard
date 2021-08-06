@@ -5,8 +5,9 @@ class UserSchema {
 	public email?: string;
 	/**TODO: password hash, rather than plain text*/
 	public password?: string;
-	/**image files in BASE64 encoding*/
+	/**image file name after upload*/
 	public profileImg?: string;
+	public photos?: string[];
 }
 
 export default class UserModel {
