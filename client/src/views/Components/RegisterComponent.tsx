@@ -102,6 +102,10 @@ export function SignUp() {
 		};
 	}
 
+	function goToLogin() {
+		history.push("/login");
+	}
+
 	return (
 		<div className="router-view sign-up">
 			<div className="form">
@@ -179,6 +183,12 @@ export function SignUp() {
 				<button onClick={signUpBtnOnClick}>
 					<img src={SignUpBtnImg} alt="register_btn" />
 				</button>
+			</div>
+			<div className="footer">
+				Already have account?{" "}
+				<span onClick={goToLogin} className="register">
+					Login
+				</span>
 			</div>
 		</div>
 	);

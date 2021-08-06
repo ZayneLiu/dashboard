@@ -133,7 +133,7 @@
 
 	.footer {
 		font-weight: bold;
-		margin-bottom: 40px;
+		margin-bottom: 50px;
 
 		justify-self: end;
 		.register {
@@ -155,4 +155,23 @@
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-evenly;
+
+	.footer {
+		font-weight: bold;
+		margin-bottom: 50px;
+
+		justify-self: end;
+		.register {
+			color: #ffe65e;
+			user-select: none;
+			cursor: pointer;
+			&:hover {
+				filter: brightness(1.05);
+				text-decoration: underline;
+			}
+			&:active {
+				filter: brightness(0.95);
+			}
+		}
+	}
 }
