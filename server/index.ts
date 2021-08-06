@@ -15,7 +15,7 @@ app.use(json({ type: "application/json" }));
 app.use(
 	fileupload({
 		useTempFiles: true,
-		tempFileDir: "/tmp/",
+		tempFileDir: "/tmp",
 		createParentPath: true,
 	})
 );
@@ -67,8 +67,6 @@ app.get("/api/news/:newsId", async (req, res) => {
 });
 
 app.post("/upload", async (req, res) => {
-	const uploadPath = __dirname + "/uploads/";
-
 	if (!req.files) {
 		res.json({ msg: "no file uploaded" });
 	}
@@ -81,7 +79,7 @@ app.post("/upload", async (req, res) => {
 		img.name = `${img.md5}${ext}`;
 
 		// move uploaded file to uploads directory
-		await img.mv(uploadPath + img.name);
+		await img.mv(`${__dirname}/uploads/${img.name}`);
 
 		// send back the filename to client
 		res.json({ profileImg: img.name });

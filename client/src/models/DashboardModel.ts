@@ -4,7 +4,10 @@ export class DashboardModel {
 		const key = "541e426aa47c6281aad333b4d7b0ba76";
 		const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${key}`;
 
-		const res = await fetch(url);
+		const res = await fetch(url, {
+			method: "GET",
+			headers: {},
+		});
 		return res.json();
 	}
 	public async getNews() {
