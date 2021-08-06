@@ -85,6 +85,10 @@ export function Home() {
 		history.push("/login");
 	}
 
+	function goTo(route: string) {
+		history.push(`${route}`);
+	}
+
 	return (
 		<div className="router-view dashboard">
 			<div className="header">
@@ -114,11 +118,7 @@ export function Home() {
 				</div>
 
 				<div className="dashboard-item">
-					<h2
-						className="title"
-						onClick={() => {
-							history.push("/news");
-						}}>
+					<h2 className="title" onClick={() => goTo("/news")}>
 						News <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 					<div className="content">
@@ -128,11 +128,7 @@ export function Home() {
 				</div>
 
 				<div className="dashboard-item">
-					<h2
-						className="title"
-						onClick={() => {
-							history.push("/sport");
-						}}>
+					<h2 className="title" onClick={() => goTo("/sport")}>
 						Sport <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 					<div className="content">
@@ -141,11 +137,7 @@ export function Home() {
 				</div>
 
 				<div className="dashboard-item ">
-					<h2
-						className="title"
-						onClick={() => {
-							history.push("/photos");
-						}}>
+					<h2 className="title" onClick={() => goTo("/photos")}>
 						Photos <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 
@@ -154,7 +146,7 @@ export function Home() {
 					</div>
 				</div>
 				<div className="dashboard-item">
-					<h2 className="title">
+					<h2 className="title" onClick={() => goTo("/tasks")}>
 						Tasks <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 					<div className="content"></div>
