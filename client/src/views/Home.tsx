@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { DashboardModel } from "../models/DashboardModel";
-import AddPicture from "./../assets/Add_picture.png";
 import { UserSchema } from "../models/UserModel";
+import PhotoList from "./Components/PhotoListComponent";
+import AddPicture from "./../assets/Add_picture.png";
+
 import "./Home.scss";
 // import CloudsIcon from "../assets/Clouds_icon.png";
 // import RainIcon from "../assets/Rain_icon.png";
@@ -148,13 +150,8 @@ export function Home() {
 						Photos <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 
-					<div className="content photos">
-						<img className="preview" src={AddPicture} alt="" />
-						<img className="preview" src={AddPicture} alt="" />
-						<img className="preview" src={AddPicture} alt="" />
-						<img className="preview" src={AddPicture} alt="" />
-						<img className="preview" src={AddPicture} alt="" />
-						<img className="preview" src={AddPicture} alt="" />
+					<div className="photo-content photos">
+						<PhotoList _id={currentUser._id} limit={6}></PhotoList>
 					</div>
 				</div>
 				<div className="dashboard-item">
