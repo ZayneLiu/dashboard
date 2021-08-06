@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { DashboardModel } from "./../models/DashboardModel";
 
+import "./News.scss";
 export function News(props: any) {
 	const history = useHistory();
 	const model = new DashboardModel();

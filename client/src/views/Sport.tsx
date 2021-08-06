@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { DashboardModel } from "../models/DashboardModel";
 import { Table } from "antd";
+
+import "./Sport.scss";
 import "antd/dist/antd.css";
 
 const { Column } = Table;

@@ -1,5 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+
+import "./Photos.scss";
 import AddPicture from "./../assets/Add_picture.png";
 
 export function Photos(props: any) {
