@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { DashboardModel } from "../models/DashboardModel";
+import { Table } from "antd";
+import "antd/dist/antd.css";
+
+const { Column } = Table;
 
 export function Sport(props: any) {
 	const history = useHistory();
@@ -16,7 +20,13 @@ export function Sport(props: any) {
 	useEffect(() => {
 		if (sportData) return;
 		model.getSportData().then((json) => {
-			setSportData(json);
+			const arrSportData: any[] = json.map((item: any, index: number) => {
+				const { Div, Date, HomeTeam, AwayTeam, FTHG, FTAG } = item;
+				return { key: index, Div, Date, HomeTeam, AwayTeam, FTHG, FTAG };
+			});
+
+			setSportData(arrSportData);
+			setSearchResult(arrSportData);
 		});
 	});
 
@@ -34,6 +44,12 @@ export function Sport(props: any) {
 	return (
 		<div className="sport-page router-view">
 			<p className="title">Sport</p>
+			<button
+				onClick={() => {
+					history.push("/");
+				}}>
+				Back to Dashboard
+			</button>
 			<div className="form-item">
 				<input
 					ref={teamNameRef}
@@ -45,48 +61,20 @@ export function Sport(props: any) {
 				/>
 				<label htmlFor="team-name">Team Name</label>
 			</div>
-			<div>
-				<button
-					onClick={() => {
-						history.push("/");
-					}}>
-					Back to Dashboard
-				</button>{" "}
-				Result: {searchResult?.length}
-			</div>
-			<ul>
-				{searchResult?.map((item, index) => {
-					const { Div, Date, HomeTeam, AwayTeam, FTHG, FTAG } = item;
-					return (
-						<li className="result-item" key={index}>
-							<div>
-								<span className="field">Div:</span>
-								<span className="value">{Div}</span>
-							</div>
-							<div>
-								<span className="field">Date:</span>
-								<span>{Date}</span>
-							</div>
-							<div>
-								<span className="field">HomeTeam:</span>
-								<span>{HomeTeam}</span>
-							</div>
-							<div>
-								<span className="field">AwayTeam:</span>
-								<span>{AwayTeam}</span>
-							</div>
-							<div>
-								<span className="field">HomeTeam Goal:</span>
-								<span>{FTHG}</span>
-							</div>
-							<div>
-								<span className="field">AwayTeam Goal:</span>
-								<span> {FTAG}</span>
-							</div>
-						</li>
-					);
-				})}
-			</ul>
+			<div>Result: {searchResult?.length}</div>
+
+			<Table
+				className="table"
+				dataSource={searchResult}
+				pagination={false}
+				sticky={true}>
+				<Column title="Div" dataIndex="Div" key="Div"></Column>
+				<Column title="Date" dataIndex="Date" key="Date"></Column>
+				<Column title="HomeTeam" dataIndex="HomeTeam" key="HomeTeam"></Column>
+				<Column title="AwayTeam" dataIndex="AwayTeam" key="AwayTeam"></Column>
+				<Column title="FTHG" dataIndex="FTHG" key="FTHG"></Column>
+				<Column title="FTAG" dataIndex="FTAG" key="FTAG"></Column>
+			</Table>
 		</div>
 	);
 }
