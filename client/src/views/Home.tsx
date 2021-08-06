@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { DashboardModel } from "../models/DashboardModel";
 import { UserSchema } from "../models/UserModel";
 import PhotoList from "./Components/PhotoListComponent";
-import AddPicture from "./../assets/Add_picture.png";
 
 import "./Home.scss";
 // import CloudsIcon from "../assets/Clouds_icon.png";

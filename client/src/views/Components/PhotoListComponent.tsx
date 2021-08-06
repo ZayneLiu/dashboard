@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FileModel from "../../models/FileModel";
-import { ObjectId, UserSchema } from "../../models/UserModel";
+import { ObjectId } from "../../models/UserModel";
 import "./PhotoListComponent.scss";
 
 export default function PhotList(props: any) {
