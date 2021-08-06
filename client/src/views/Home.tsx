@@ -54,7 +54,7 @@ export function Home() {
 
 							// unpack and assemble open weather icon url
 							setWeatherIconUrl(
-								`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
+								`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
 							);
 							console.log(weatherIconUrl);
 						}
