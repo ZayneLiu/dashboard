@@ -6,8 +6,9 @@ class UserSchema {
 	public email?: string;
 	/**TODO: password hash, rather than plain text*/
 	public password?: string;
-	/**image files in BASE64 encoding*/
+	/**image file name after upload*/
 	public profileImg?: string;
+	public photos?: string[];
 }
 
 export default class UserModel {
@@ -51,7 +52,12 @@ export default class UserModel {
 	}
 
 	public async findUser(user: UserSchema) {
-		return await this.db.findUser(user);
+		return this.db.findUser(user);
+	}
+
+	public async updateUser(_id: ObjectId, user: UserSchema) {
+		return (await this.db.updateUser({ _id }, { $set: { ...user } }))
+			.modifiedCount;
 	}
 	public async deleteUser(user: UserSchema): Promise<number> {
 		const { _id, ...userInfo } = user;
