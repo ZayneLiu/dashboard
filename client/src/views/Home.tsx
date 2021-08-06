@@ -149,8 +149,8 @@ export function Home() {
 						Photos <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
 
-					<div className="photo-content photos">
-						<PhotoList _id={currentUser._id} limit={6}></PhotoList>
+					<div className="content photos">
+						<PhotoList _id={currentUser?._id} limit={6}></PhotoList>
 					</div>
 				</div>
 				<div className="dashboard-item">

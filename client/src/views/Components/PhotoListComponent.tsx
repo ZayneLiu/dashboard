@@ -13,7 +13,7 @@ export default function PhotList(props: any) {
 	const [photos, setPhotos] = useState<string[]>();
 
 	useEffect(() => {
-		if (photos) return;
+		if (photos || !_id) return;
 
 		model.getPhotos(_id!).then((user) => {
 			if (!user.photos) setPhotos([]);
@@ -25,12 +25,18 @@ export default function PhotList(props: any) {
 		if (limit) return photos?.slice(0, limit)!;
 		else return photos!;
 	}
-	// const { _id } = JSON.parse(
-	//     sessionStorage.getItem("currentUser")!
-	// ) as UserSchema;
 
 	return (
 		<>
+			{getPhotos()?.length === 0 && limit ? (
+				<div>
+					<br />
+					<br />
+					No photos yet, please upload
+				</div>
+			) : (
+				""
+			)}
 			{getPhotos()?.map((item, index) => {
 				return (
 					<div className="image-wrapper" key={index}>
