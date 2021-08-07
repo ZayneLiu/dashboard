@@ -39,16 +39,15 @@ export default class UserModel {
 	public async login(user: UserSchema): Promise<UserSchema | null> {
 		const { _id, email, profileImg, ...loginInfo } = user;
 
-		const res = await this.db.findUser(loginInfo).toArray<UserSchema>();
+		const res = await this.db.findUser(loginInfo);
 
-		if (res.length > 0) {
+		if (res) {
 			// record match, login successful
 			const { password, ...restUserInfo } = res[0];
 			return restUserInfo;
-		} else {
-			// Invalid username / password
-			return null;
 		}
+		// Invalid username / password
+		else return null;
 	}
 
 	public async findUser(user: UserSchema) {

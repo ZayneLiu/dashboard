@@ -15,26 +15,18 @@ export default class DB {
 		this.users = this.client.db("dashboard").collection("users");
 	}
 
-	public async setup() {
-		await this.client.connect();
-	}
-
-	public async cleanup() {
-		await this.client.close();
-	}
+	public setup = async () => await this.client.connect();
+	public cleanup = async () => await this.client.close();
 
 	public insertUser(doc: any) {
 		return this.users.insertOne(doc);
 	}
-
 	public findUser(filter: any) {
-		return this.users.find(filter);
+		return this.users.findOne(filter, {});
 	}
-
 	public updateUser(filter: any, doc: any) {
 		return this.users.updateOne(filter, doc);
 	}
-
 	public deleteUser(filter: any) {
 		return this.users.deleteOne(filter);
 	}
