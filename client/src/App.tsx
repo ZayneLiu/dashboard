@@ -5,6 +5,7 @@ import { Home } from "./views/Home";
 import { News } from "./views/News";
 import { Sport } from "./views/Sport";
 import { Photos } from "./views/Photos";
+import { Tasks } from "./views/Task";
 import "./App.scss";
 
 function App() {
@@ -14,25 +15,23 @@ function App() {
 				<Route exact path="/login">
 					<Auth isRegister={false} />
 				</Route>
-
 				<Route exact path="/sign-up">
 					<Auth isRegister={true} />
 				</Route>
-
 				<Route exact path="/">
 					<Home></Home>
 				</Route>
-
 				<Route exact path="/news">
 					<News></News>
 				</Route>
-
 				<Route exact path="/sport">
 					<Sport></Sport>
 				</Route>
-
 				<Route exact path="/photos">
 					<Photos></Photos>
+				</Route>
+				<Route exact path="/tasks">
+					<Tasks></Tasks>
 				</Route>
 			</Router>
 		</div>
