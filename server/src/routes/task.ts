@@ -1,10 +1,11 @@
 import { Request, Response, Router } from "express";
 import { ObjectId } from "mongodb";
-import UserModel, { UserSchema } from "../models/UserModel";
+import UserModel, { TaskSchema, UserSchema } from "../models/UserModel";
 
 const router = Router();
 const model = new UserModel();
 
+// get all tasks for user
 router.get("/api/tasks/:userId", async (req, res) => {
 	const _id = new ObjectId(req.params["userId"]);
 
@@ -14,6 +15,7 @@ router.get("/api/tasks/:userId", async (req, res) => {
 	res.json(findRes);
 });
 
+// add task to user
 router.post("/api/tasks/:userId", async (req, res) => {
 	const userId = new ObjectId(req.params["userId"]);
 
@@ -25,6 +27,16 @@ router.post("/api/tasks/:userId", async (req, res) => {
 	res.json(updateRes);
 });
 
-router.delete("/api/tasks/:userId");
+// update task
+router.post("/api/task/:taskId", async (req, res) => {
+	const taskId = new ObjectId(req.params["taskId"]);
+	const { _id, ...updateInfo } = req.body as TaskSchema;
+
+	const updateRes = await model.updateTask(taskId, updateInfo);
+
+	res.json(await model.findTask(taskId));
+});
+
+router.delete("/api/task/:taskId");
 
 export default router;
