@@ -8,15 +8,10 @@ const model = new UserModel();
 router.get("/api/tasks/:userId", async (req, res) => {
 	const _id = new ObjectId(req.params["userId"]);
 
-	await model.setup();
-	// get user by _id
-	const findRes = (await model.findUser({ _id })) as UserSchema;
-	await model.cleanup();
+	const findRes = (await model.getTasks(_id)) as TaskSchema[];
 
-	// unpack tasks
-	const { tasks } = findRes;
-
-	res.json(tasks);
+	// TODO:
+	res.json(findRes);
 });
 
 router.post("/api/tasks/:userId", async (req, res) => {

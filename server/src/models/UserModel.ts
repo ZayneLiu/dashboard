@@ -24,33 +24,29 @@ export default class UserModel {
 	}
 
 	private db!: DB;
-
-	public async setup() {
-		await this.db.setup();
-	}
-
-	public async cleanup() {
-		await this.db.cleanup();
-	}
+	public setup = async () => await this.db.setup();
+	public cleanup = async () => await this.db.cleanup();
 
 	public async register(user: UserSchema) {
 		// TODO: duplicate username or email verification
 		// this.db.find({ username: user.username });
 		// this.db.find({ email: user.email });
 		const { _id, ...registerInfo } = user;
-
+		await this.setup();
 		const res = await this.db.insertUser(registerInfo);
+		await this.cleanup();
 		return res;
 	}
 
 	public async login(user: UserSchema): Promise<UserSchema | null> {
 		const { _id, email, profileImg, ...loginInfo } = user;
-
-		const res = await this.db.findUser(loginInfo);
+		await this.setup();
+		const res = (await this.db.findUser(loginInfo)) as UserSchema;
+		await this.cleanup();
 
 		if (res) {
 			// record match, login successful
-			const { password, ...restUserInfo } = res[0];
+			const { password, ...restUserInfo } = res;
 			return restUserInfo;
 		}
 		// Invalid username / password
@@ -58,18 +54,29 @@ export default class UserModel {
 	}
 
 	public async findUser(user: UserSchema) {
-		return this.db.findUser(user);
+		await this.setup();
+
+		const res = await this.db.findUser(user);
+		await this.cleanup();
+		return res;
 	}
 
 	public async updateUser(_id: ObjectId, user: UserSchema) {
-		return (await this.db.updateUser({ _id }, { $set: { ...user } }))
+		await this.setup();
+		const res = (await this.db.updateUser({ _id }, { $set: { ...user } }))
 			.modifiedCount;
+		await this.cleanup();
+		return res;
 	}
 	public async deleteUser(user: UserSchema): Promise<number> {
 		const { _id, ...userInfo } = user;
 
-		return (await this.db.deleteUser(userInfo)).deletedCount;
+		await this.setup();
+		const res = (await this.db.deleteUser(userInfo)).deletedCount;
+		await this.cleanup();
+		return res;
+	}
 	}
 }
 
-export { UserSchema };
+export { UserSchema, TaskSchema };

@@ -11,9 +11,7 @@ async function register(req: Request, res: Response) {
 	const data: UserSchema = req.body;
 	const { _id, ...registerInfo } = data;
 	// TODO: check duplicates accounts
-	await model.setup();
 	const insertRes = await model.register(registerInfo);
-	await model.cleanup();
 
 	res.json(insertRes);
 }
@@ -22,9 +20,7 @@ async function login(req: Request, res: Response) {
 	const data: UserSchema = req.body;
 	const { _id, email, profileImg, ...loginInfo } = data;
 
-	await model.setup();
 	const loginRes = await model.login(loginInfo);
-	await model.cleanup();
 
 	res.json(loginRes);
 }

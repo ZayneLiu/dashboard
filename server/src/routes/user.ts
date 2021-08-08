@@ -13,9 +13,7 @@ router.post("/api/user/:userId", updateUser);
 async function getUserById(req: Request, res: Response) {
 	const _id = new ObjectId(req.params["userId"]);
 
-	await model.setup();
 	const user = (await model.findUser({ _id })) as UserSchema;
-	await model.cleanup();
 
 	const { password, ...userInfo } = user;
 
@@ -26,10 +24,8 @@ async function updateUser(req: Request, res: Response) {
 	const _id = new ObjectId(req.params["userId"]);
 	const data: UserSchema = req.body;
 
-	await model.setup();
 	const updateRes = await model.updateUser(_id, data);
 	const user = (await model.findUser({ _id })) as UserSchema;
-	await model.cleanup();
 
 	const { password, ...userInfo } = user;
 
