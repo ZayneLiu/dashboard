@@ -9,6 +9,13 @@ class UserSchema {
 	/**image file name after upload*/
 	public profileImg?: string;
 	public photos?: string[];
+	public tasks?: ObjectId[];
+}
+
+class TaskSchema {
+	public _id?: ObjectId;
+	public task?: string;
+	public completed?: boolean;
 }
 
 export default class UserModel {
