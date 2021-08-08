@@ -10,9 +10,11 @@ import userRoutes from "./src/routes/user";
 import fileRoutes from "./src/routes/file";
 import authRoutes from "./src/routes/auth";
 import taskRoutes from "./src/routes/task";
+import UserModel from "./src/models/UserModel";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+export const model = new UserModel();
 
 // middleware
 app.use(json({ type: "application/json" }));
@@ -49,7 +51,10 @@ app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-// start server
-app.listen(PORT, () => {
-	console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+// connect to db
+model.setup().then(() => {
+	// start server
+	app.listen(PORT, () => {
+		console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+	});
 });

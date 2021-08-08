@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
 import { ObjectId } from "mongodb";
 import UserModel, { TaskSchema, UserSchema } from "../models/UserModel";
+import { model } from "../../index";
 
 const router = Router();
-const model = new UserModel();
 
 // get all tasks for user
 router.get("/api/tasks/:userId", async (req, res) => {
@@ -11,7 +11,13 @@ router.get("/api/tasks/:userId", async (req, res) => {
 
 	const findRes = (await model.getTasks(_id)) as TaskSchema[];
 
-	// TODO:
+	res.json(findRes);
+});
+
+router.get("/api/task/:taskId", async (req, res) => {
+	const _id = new ObjectId(req.params["taskId"]);
+
+	const findRes = (await model.findTask(_id)) as TaskSchema;
 	res.json(findRes);
 });
 

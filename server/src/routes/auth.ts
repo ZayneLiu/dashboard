@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import UserModel, { UserSchema } from "../models/UserModel";
+import { model } from "../../index";
 
 const router = Router();
-const model = new UserModel();
 
 router.post("/api/register", register);
 router.post("/api/login", login);

@@ -32,17 +32,17 @@ export default class UserModel {
 		// this.db.find({ username: user.username });
 		// this.db.find({ email: user.email });
 		const { _id, ...registerInfo } = user;
-		await this.setup();
+		// await this.setup();
 		const res = await this.db.insertUser(registerInfo);
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 
 	public async login(user: UserSchema): Promise<UserSchema | null> {
 		const { _id, email, profileImg, ...loginInfo } = user;
-		await this.setup();
+		// await this.setup();
 		const res = (await this.db.findUser(loginInfo)) as UserSchema;
-		await this.cleanup();
+		// await this.cleanup();
 
 		if (res) {
 			// record match, login successful
@@ -54,33 +54,32 @@ export default class UserModel {
 	}
 
 	public async findUser(user: UserSchema) {
-		await this.setup();
-
+		// await this.setup();
 		const res = await this.db.findUser(user);
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 
 	public async updateUser(_id: ObjectId, user: UserSchema) {
-		await this.setup();
+		// await this.setup();
 		const res = (await this.db.updateUser({ _id }, { $set: { ...user } }))
 			.modifiedCount;
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 	public async deleteUser(user: UserSchema): Promise<number> {
 		const { _id, ...userInfo } = user;
 
-		await this.setup();
+		// await this.setup();
 		const res = (await this.db.deleteUser(userInfo)).deletedCount;
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 
 	public async getTasks(userId: ObjectId) {
 		let tasks: TaskSchema[] = [];
 
-		await this.setup();
+		// await this.setup();
 		const userRes = (await this.db.findUser({ _id: userId })) as UserSchema;
 
 		if (userRes.tasks) {
@@ -90,22 +89,21 @@ export default class UserModel {
 				tasks.push(task);
 			}
 		}
-
-		await this.cleanup();
+		// await this.cleanup();
 
 		return tasks;
 	}
 
 	public async findTask(taskId: ObjectId) {
-		await this.setup();
+		// await this.setup();
 		const findRes = await this.db.findTask({ _id: taskId });
-		await this.cleanup();
+		// await this.cleanup();
 
 		return findRes;
 	}
 
 	public async addTask(userId: ObjectId, task: string) {
-		await this.setup();
+		// await this.setup();
 		// add new task
 		const taskInsertRes = await this.db.insertTask({ task, completed: false });
 		console.log("task added");
@@ -121,21 +119,20 @@ export default class UserModel {
 			{ _id: userId },
 			{ $set: { tasks } }
 		);
-		await this.cleanup();
+		// await this.cleanup();
 
 		return updateRes;
 	}
 	public async updateTask(taskId: ObjectId, doc: TaskSchema) {
-		await this.setup();
+		// await this.setup();
 		const res = await this.db.updateTask({ _id: taskId }, { $set: { ...doc } });
-
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 	public async deleteTask(taskId: ObjectId) {
-		await this.setup();
+		// await this.setup();
 		const res = await this.db.deleteTask({ _id: taskId });
-		await this.cleanup();
+		// await this.cleanup();
 		return res;
 	}
 }

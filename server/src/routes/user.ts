@@ -1,11 +1,10 @@
 import { timeLog } from "console";
 import { Request, Response, Router } from "express";
 import { ObjectId } from "mongodb";
-import UserModel, { UserSchema } from "../models/UserModel";
+import { UserSchema } from "../models/UserModel";
+import { model } from "../../index";
 
 const router = Router();
-
-const model = new UserModel();
 
 router.get("/api/user/:userId", getUserById);
 router.post("/api/user/:userId", updateUser);
