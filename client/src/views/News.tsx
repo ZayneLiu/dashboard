@@ -17,9 +17,14 @@ export function News(props: any) {
 	useEffect(() => {
 		if (news) return;
 
+		let mounted = true;
 		model.getNews().then((json) => {
-			setNews(json[0]);
+			if (mounted) setNews(json[0]);
 		});
+
+		return () => {
+			mounted = false;
+		};
 	});
 
 	// useEffect(() => {
@@ -35,19 +40,18 @@ export function News(props: any) {
 
 	return (
 		<div className="news-page router-view">
-			<h2 className="title">News</h2>
-			<p className="headline">{news?.title}</p>
-			<p className="description">{news?.description}</p>
-			<a href={news?.link} rel="noreferrer" target="_blank">
-				find more on BBC
-			</a>
-			<br />
+			<p className="title">News</p>
 			<button
 				onClick={() => {
 					history.push("/");
 				}}>
 				back to dashboard
 			</button>
+			<p className="headline">{news?.title}</p>
+			<p className="description">{news?.description}</p>
+			<a href={news?.link} rel="noreferrer" target="_blank">
+				find more on BBC
+			</a>
 		</div>
 	);
 }
