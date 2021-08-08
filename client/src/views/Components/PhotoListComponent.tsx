@@ -15,10 +15,16 @@ export default function PhotList(props: any) {
 	useEffect(() => {
 		if (photos || !_id) return;
 
+		let mounted = true;
 		model.getPhotos(_id!).then((user) => {
+			if (!mounted) return;
 			if (!user.photos) setPhotos([]);
 			else setPhotos(user.photos!);
 		});
+
+		return () => {
+			mounted = false;
+		};
 	});
 
 	function getPhotos(): string[] {

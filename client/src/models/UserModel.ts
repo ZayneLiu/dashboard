@@ -75,6 +75,32 @@ export default class UserModel {
 		});
 		return (await updateRes.json()) as UserSchema;
 	}
+
+	public async addTask(userId: ObjectId, task: string) {
+		await fetch(`/api/tasks/${userId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ task }),
+		});
+	}
+
+	public async updateTask(taskId: ObjectId, task: TaskSchema) {
+		console.log(taskId, task);
+		const res = await fetch(`/api/task/${taskId}`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(task),
+		});
+
+		return res.json();
+	}
+	public async getTasks(userId: ObjectId) {
+		const res = await fetch(`/api/tasks/${userId}`);
+		return res;
+	}
+	public async deleteTask() {}
 }
 
 export { UserSchema, ObjectId, TaskSchema };

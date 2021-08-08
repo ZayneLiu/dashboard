@@ -1,0 +1,51 @@
+.task-item {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: space-between;
+
+	height: 50px;
+
+	.task {
+		border-bottom: 2px solid #fff;
+		padding-left: 5px;
+		font-weight: bold;
+		font-family: inherit;
+		font-size: 25px;
+		flex: 1;
+
+		text-align: start;
+		input {
+			width: 100%;
+			background: transparentize($color: #fff, $amount: 0.8);
+			outline: none;
+
+			border: 1px solid #fff;
+		}
+	}
+	.task-checkbox {
+		width: 35px;
+		height: 35px;
+		border-radius: 5px;
+		border: 2px solid #a2a2a2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		font-size: 30px;
+
+		background-color: #fff;
+		user-select: none;
+		cursor: pointer;
+
+		transition: all 0.15s ease-in;
+
+		&.unchecked {
+			color: #fff;
+		}
+
+		&.checked {
+			color: #000;
+		}
+	}
+}
