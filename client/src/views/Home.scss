@@ -87,6 +87,7 @@
 				padding: 5px;
 				display: flex;
 				flex-flow: column;
+				overflow: hidden;
 				&.photos {
 					flex: 1;
 					margin: 3px;

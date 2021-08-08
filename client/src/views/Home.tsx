@@ -4,11 +4,9 @@ import { useHistory } from "react-router-dom";
 import { DashboardModel } from "../models/DashboardModel";
 import { UserSchema } from "../models/UserModel";
 import PhotoList from "./Components/PhotoListComponent";
+import { TaskList } from "./Components/TaskListComponent";
 
 import "./Home.scss";
-// import CloudsIcon from "../assets/Clouds_icon.png";
-// import RainIcon from "../assets/Rain_icon.png";
-// import SunIcon from "../assets/Sun_icon.png";
 
 export function Home() {
 	const history = useHistory();
@@ -44,6 +42,7 @@ export function Home() {
 	useEffect(() => {
 		if (weatherRetrieved.name !== "loading") return;
 
+		let mounted = true;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 				(location: GeolocationPosition) =>
@@ -51,6 +50,7 @@ export function Home() {
 						const { name, main, weather } = json;
 
 						if (weatherRetrieved.name === "loading") {
+							if (!mounted) return;
 							setWeather({ name, main, weather });
 
 							// unpack and assemble open weather icon url
@@ -64,6 +64,10 @@ export function Home() {
 		} else {
 			alert("Geolocation is not supported by this browser.");
 		}
+
+		return () => {
+			mounted = false;
+		};
 	});
 
 	useEffect(() => {
@@ -73,12 +77,6 @@ export function Home() {
 			setNews(json[0]);
 		});
 	});
-
-	// function getWeatherIcon() {
-	// 	if (weatherRetrieved.weather[0]?.main === "Rain") return RainIcon;
-	// 	if (weatherRetrieved.weather[0]?.main === "Clear") return SunIcon;
-	// 	if (weatherRetrieved.weather[0]?.main === "Clouds") return CloudsIcon;
-	// }
 
 	function logout() {
 		sessionStorage.removeItem("currentUser");
@@ -108,7 +106,6 @@ export function Home() {
 						<div>
 							{/* get icon from open weather API */}
 							<img src={weatherIconUrl} alt="" />
-							{/* <img src={getWeatherIcon()} alt="" /> */}
 							<div className="temperature">
 								{weatherRetrieved?.main.temp} &deg;C
 							</div>
@@ -149,7 +146,9 @@ export function Home() {
 					<h2 className="title" onClick={() => goTo("/tasks")}>
 						Tasks <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
-					<div className="content"></div>
+					<div className="content">
+						<TaskList />
+					</div>
 				</div>
 				<div className="dashboard-item">
 					<h2 className="title">
