@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import { useHistory } from "react-router-dom";
 import { DashboardModel } from "../models/DashboardModel";
 import { Table } from "antd";
@@ -13,7 +13,7 @@ export function Sport(props: any) {
 
 	const model = new DashboardModel();
 
-	const teamNameRef = React.createRef<HTMLInputElement>();
+	const teamNameRef = createRef<HTMLInputElement>();
 
 	const [sportData, setSportData] = useState<any[]>();
 
