@@ -22,6 +22,7 @@ export default function PhotList(props: any) {
 			if (!user.photos) setPhotos([]);
 			else setPhotos(user.photos!);
 		});
+		// eslint-disable-next-line
 	}, [reRenderHandle]);
 
 	useEffect(() => {
