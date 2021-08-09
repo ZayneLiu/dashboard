@@ -1,3 +1,4 @@
+import { message } from "antd";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import LoginBtnImg from "../../assets/Login_button.png";
@@ -19,7 +20,7 @@ export function Login() {
 
 	async function loginBtnOnClick() {
 		if (!isLoginFormValid()) {
-			alert("please provide correct login details");
+			message.warn("please provide correct login details", 1);
 			return;
 		}
 
@@ -36,7 +37,7 @@ export function Login() {
 			// set session storage
 			sessionStorage.setItem("currentUser", JSON.stringify(loginRes));
 			// login success
-			// alert("login success!");
+			message.success("login success!", 1);
 			// redirect
 			history.push("/");
 		} else {

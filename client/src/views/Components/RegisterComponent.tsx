@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import SignUpBtnImg from "../../assets/Register_button.png";
 import AddPicImg from "../../assets/Add_picture.png";
 import UserModel, { UserSchema } from "./../../models/UserModel";
+import { message } from "antd";
 
 export function SignUp() {
 	// router
@@ -46,12 +47,12 @@ export function SignUp() {
 	async function signUpBtnOnClick() {
 		// validate form
 		if (!isFormValid()) {
-			alert("please provide valid information");
+			message.warn("please provide valid information", 1);
 			return;
 		}
 		// validate confirm password
 		if (passwordRef.current?.value !== confirmPasswordRef.current?.value) {
-			alert("please make sure passwords match");
+			message.warn("please make sure passwords match", 1);
 			return;
 		}
 
@@ -62,10 +63,8 @@ export function SignUp() {
 			password: passwordRef.current?.value,
 		};
 
-		// FIXME: file upload
-		// profileImg: selectedImg,
 		if (!selectedImg) {
-			alert("please choose a profile image");
+			message.warn("please choose a profile image", 1);
 			return;
 		}
 
@@ -73,10 +72,10 @@ export function SignUp() {
 		const { insertedId } = await model.register(user, selectedImg);
 
 		if (insertedId) {
-			// TODO: register complete
 			console.log(insertedId);
 			// report
-			alert("registration complete. please login");
+			message.success("registration complete. please login");
+
 			// redirect
 			history.push("/login");
 			return;
