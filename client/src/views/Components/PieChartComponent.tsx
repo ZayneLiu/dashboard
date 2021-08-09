@@ -4,13 +4,13 @@ import "./PieChartComponent.scss";
 
 export function PieChart(props: any) {
 	const { clotheData }: { clotheData: { [clothe: string]: number } } = props;
-	console.log(clotheData);
+	// console.log(clotheData);
 
 	let data: any[] = [];
 	for (const key in clotheData) {
 		data.push([key, clotheData[key]]);
 	}
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<Chart

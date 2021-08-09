@@ -17,7 +17,7 @@ export default class FileModel {
 	}
 
 	public async getPhotos(_id: ObjectId) {
-		console.log(_id);
+		// console.log(_id);
 
 		const res = await fetch(`/api/user/${_id}`);
 

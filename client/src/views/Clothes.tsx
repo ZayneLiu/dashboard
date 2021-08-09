@@ -21,7 +21,7 @@ export function Clothes(props: any) {
 			const { payload }: { payload: ClothData[] } = json;
 			setClothData(payload);
 
-			console.log(payload);
+			// console.log(payload);
 			payload.forEach((item) => {
 				if (res[item.clothe!]) res[item.clothe!] += 1;
 				else res[item.clothe!] = 1;
