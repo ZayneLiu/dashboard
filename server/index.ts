@@ -6,6 +6,7 @@ import fileupload from "express-fileupload";
 import { getSportData } from "./src/utils/SportData";
 import { getNewsByUrl, getNewsFeed } from "./src/utils/NewsFeed";
 
+import corsRoutes from "./src/routes/cors";
 import userRoutes from "./src/routes/user";
 import fileRoutes from "./src/routes/file";
 import authRoutes from "./src/routes/auth";
@@ -37,6 +38,7 @@ app.use(userRoutes);
 app.use(fileRoutes);
 app.use(authRoutes);
 app.use(taskRoutes);
+app.use(corsRoutes);
 
 app.get("/api/sport", async (req, res) => res.json(await getSportData("")));
 app.get("/api/news", async (req, res) => res.json(await getNewsFeed()));
