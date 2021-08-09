@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { DashboardModel } from "../models/DashboardModel";
 import { UserSchema } from "../models/UserModel";
+import { Clothes } from "./Clothes";
 import PhotoList from "./Components/PhotoListComponent";
 import { TaskList } from "./Components/TaskListComponent";
 
@@ -96,7 +97,9 @@ export function Home() {
 						alt=""
 					/>
 				</div>
-				<h1>Good day {currentUser ? currentUser.username : ""}</h1>
+				<p className="title">
+					Good day {currentUser ? currentUser.username : ""}
+				</p>
 				<button onClick={logout}>Logout</button>
 			</div>
 			<main>
@@ -154,7 +157,9 @@ export function Home() {
 					<h2 className="title">
 						Clothes <span style={{ fontSize: 12 }}>[click]</span>
 					</h2>
-					<div className="content"></div>
+					<div className="content">
+						<Clothes></Clothes>
+					</div>
 				</div>
 			</main>
 		</div>
