@@ -11,6 +11,12 @@ export class DashboardModel {
 		const res = await fetch("/api/news");
 		return res.json();
 	}
+	public async getNewsDetail(newsUrl: string) {
+		const encodedUrl = Buffer.from(newsUrl).toString("base64");
+		const res = await fetch(`/api/news/${encodedUrl}`);
+
+		return await res.json();
+	}
 
 	public async getSportData() {
 		const res = await fetch("/api/sport");
