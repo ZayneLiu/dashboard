@@ -7,10 +7,22 @@ export default function PhotList(props: any) {
 	const {
 		_id,
 		limit,
-	}: { _id: ObjectId | undefined; limit: number | undefined } = props;
+		reRenderHandle,
+	}: {
+		_id: ObjectId | undefined;
+		limit: number | undefined;
+		reRenderHandle: number | undefined;
+	} = props;
 	const model = new FileModel();
 
 	const [photos, setPhotos] = useState<string[]>();
+
+	useEffect(() => {
+		model.getPhotos(_id!).then((user) => {
+			if (!user.photos) setPhotos([]);
+			else setPhotos(user.photos!);
+		});
+	}, [reRenderHandle]);
 
 	useEffect(() => {
 		if (photos || !_id) return;
@@ -36,7 +48,6 @@ export default function PhotList(props: any) {
 		<>
 			{getPhotos()?.length === 0 && limit ? (
 				<div>
-					<br />
 					<br />
 					No photos yet, please upload
 				</div>

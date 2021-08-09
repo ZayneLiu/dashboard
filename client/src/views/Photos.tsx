@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { message } from "antd";
 
@@ -16,6 +16,8 @@ export function Photos(props: any) {
 
 	const photoUploadRef = createRef<HTMLInputElement>();
 
+	const [rand, setRand] = useState<number>(0);
+
 	const { _id } = JSON.parse(
 		sessionStorage.getItem("currentUser")!
 	) as UserSchema;
@@ -25,13 +27,13 @@ export function Photos(props: any) {
 	}
 
 	async function photoUploadOnchange() {
-		console.log(photoUploadRef.current!.files![0]);
+		// console.log(photoUploadRef.current!.files![0]);
 		const messageKey = "upload";
 		message.loading({ content: "image uploading", key: messageKey });
 
 		const img = photoUploadRef.current!.files![0];
 		const image = await model.uploadFile(img);
-		console.log(image);
+		// console.log(image);
 
 		message.success({ content: "uploaded", key: messageKey });
 
@@ -44,6 +46,7 @@ export function Photos(props: any) {
 		// update user info
 		await userModel.updateUser(_id!, { photos });
 
+		setRand(Math.random() * 100);
 		// setPhotos((await model.getPhotos(_id!)).photos);
 	}
 
@@ -58,7 +61,7 @@ export function Photos(props: any) {
 			</button>
 
 			<div className="content">
-				<PhotoList _id={_id} />
+				<PhotoList reRenderHandle={rand} _id={_id} />
 
 				<div className="add-btn" onClick={uploadBtnOnclick}>
 					<input
