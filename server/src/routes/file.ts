@@ -21,7 +21,7 @@ async function fileUpload(req: Request, res: Response) {
 		const ext = path.extname(img.name).toLowerCase();
 		img.name = `${img.md5}${ext}`;
 		// move uploaded file to uploads directory
-		await img.mv(`${__dirname}/uploads/${img.name}`);
+		await img.mv(resolve(`${__dirname}/../../uploads/${img.name}`));
 		// send back the filename to client
 		res.json({ image: img.name });
 	}
