@@ -43,8 +43,9 @@ app.use(corsRoutes);
 app.get("/api/sport", async (req, res) => res.json(await getSportData("")));
 app.get("/api/news", async (req, res) => res.json(await getNewsFeed()));
 
-app.get("/api/news/:newsId", async (req, res) => {
-	const url = Buffer.from(req.params["newsId"], "base64").toString("utf-8");
+app.get("/api/news/:newsUrl", async (req, res) => {
+	const url = Buffer.from(req.params["newsUrl"], "base64").toString("utf-8");
+
 	res.json(await getNewsByUrl(url));
 });
 
