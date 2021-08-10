@@ -1,19 +1,15 @@
-// @ts-ignore-nextline
-import corsAnywhere from "cors-anywhere";
+import axios from "axios";
 import { Router } from "express";
 
 const router = Router();
 
-let proxy = corsAnywhere.createServer({
-	originWhitelist: [], // Allow all origins
-	requireHeaders: [], // Do not require any headers.
-	removeHeaders: [], // Do not remove any headers.
-});
+router.get("/clothe/data/", async (req, res) => {
+	const url =
+		"https://therapy-box.co.uk/hackathon/clothing-api.php?username=swapnil";
 
-/* Attach our cors proxy to the existing API on the /proxy endpoint. */
-router.get("/proxy/:proxyUrl*", (req, res) => {
-	req.url = req.url.replace("/proxy/", "/"); // Strip '/proxy' from the front of the URL, else the proxy won't work.
-	proxy.emit("request", req, res);
+	const dataRes = await axios.get(url);
+
+	res.json(dataRes.data);
 });
 
 export default router;

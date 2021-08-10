@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FileModel from "../../models/FileModel";
-import { ObjectId } from "../../models/UserModel";
+import { ObjectId, UserSchema } from "../../models/UserModel";
 import "./PhotoListComponent.scss";
 
 export default function PhotList(props: any) {
@@ -13,11 +13,17 @@ export default function PhotList(props: any) {
 		limit: number | undefined;
 		reRenderHandle: number | undefined;
 	} = props;
+
 	const model = new FileModel();
 
 	const [photos, setPhotos] = useState<string[]>();
 
+	const currentUser = JSON.parse(
+		sessionStorage.getItem("currentUser")!
+	) as UserSchema;
+
 	useEffect(() => {
+		if (!currentUser) return;
 		model.getPhotos(_id!).then((user) => {
 			if (!user.photos) setPhotos([]);
 			else setPhotos(user.photos!);

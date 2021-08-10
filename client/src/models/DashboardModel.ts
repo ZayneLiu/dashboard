@@ -24,9 +24,7 @@ export class DashboardModel {
 	}
 
 	public async getClothData() {
-		const res = await fetch(
-			"/proxy/https://therapy-box.co.uk/hackathon/clothing-api.php?username=swapnil"
-		);
+		const res = await fetch("/clothe/data");
 		return await res.json();
 	}
 }

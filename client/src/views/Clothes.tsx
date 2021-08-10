@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DashboardModel } from "../models/DashboardModel";
+import { UserSchema } from "../models/UserModel";
 import { PieChart } from "./Components/PieChartComponent";
 class ClothData {
 	id?: string;
@@ -14,8 +15,12 @@ export function Clothes(props: any) {
 
 	const [res] = useState<{ [clothe: string]: number }>({});
 
+	const currentUser = JSON.parse(
+		sessionStorage.getItem("currentUser")!
+	) as UserSchema;
+
 	useEffect(() => {
-		if (clothData) return;
+		if (clothData || currentUser) return;
 
 		model.getClothData().then((json) => {
 			const { payload }: { payload: ClothData[] } = json;

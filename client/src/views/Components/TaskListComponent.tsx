@@ -13,7 +13,7 @@ export function TaskList(props: any) {
 	) as UserSchema;
 
 	useEffect(() => {
-		if (tasks) return;
+		if (tasks || !currentUser) return;
 
 		let mounted = true;
 		model.getTasks(currentUser._id!).then(async (data) => {
