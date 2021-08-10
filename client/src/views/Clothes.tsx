@@ -20,7 +20,7 @@ export function Clothes(props: any) {
 	) as UserSchema;
 
 	useEffect(() => {
-		if (clothData || currentUser) return;
+		if ((clothData && currentUser) || !currentUser) return;
 
 		model.getClothData().then((json) => {
 			const { payload }: { payload: ClothData[] } = json;
